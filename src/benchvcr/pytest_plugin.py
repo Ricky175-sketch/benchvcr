@@ -24,7 +24,8 @@ def benchvcr_replay(
 
     def replay(name: str | Path) -> ReplaySession:
         relative = Path(name)
-        if relative.is_absolute():
+        # anchor also rejects drive-rooted Windows paths where is_absolute() is False.
+        if relative.anchor:
             raise ValueError("benchvcr_replay expects a relative cassette path")
         return ReplaySession(cassette_root / relative)
 

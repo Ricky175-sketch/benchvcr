@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 from fakes import cassette_text, exchange
 
@@ -11,8 +13,10 @@ def test_static_cassette_integration(benchvcr_replay: object) -> None:
 
 
 def test_absolute_path_is_rejected(benchvcr_replay: object) -> None:
-    with pytest.raises(ValueError, match="relative"):
-        benchvcr_replay("/tmp/absolute.jsonl")  # type: ignore[operator]
+    names = ("/tmp/absolute.jsonl", str(Path.cwd() / "absolute.jsonl"))
+    for name in names:
+        with pytest.raises(ValueError, match="relative"):
+            benchvcr_replay(name)  # type: ignore[operator]
 
 
 def prepare_nested(pytester: pytest.Pytester) -> None:
