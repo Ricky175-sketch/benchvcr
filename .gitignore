@@ -1,0 +1,22 @@
+# Local, project-isolated toolchain
+.tools/
+.python/
+.cache/
+.DS_Store
+.venv/
+.wheel-venv/
+
+# Python build and test outputs
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Demo output
+demo-output/
